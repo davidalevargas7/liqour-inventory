@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{{ url_for('add_liquor') }}" class="btn btn-primary mb-3">Add New Liquor</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for liquor in liquors %}
+        <tr>
+            <td>{{ liquor.liquor_name }}</td>
+            <td>{{ liquor.liquor_type }}</td>
+            <td>{{ liquor.bottle_size }}</td>
+            <td>{{ liquor.quantity }}</td>
+            <td>{{ liquor.last_updated }}</td>
+            <td>
+                <a href="{{ url_for('edit_liquor', id=liquor.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ url_for('delete_liquor', id=liquor.id) }}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

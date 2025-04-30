@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Liquor</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label>Liquor Name</label>
+        <input type="text" name="liquor_name" class="form-control" value="{{ liquor.liquor_name }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Liquor Type</label>
+        <input type="text" name="liquor_type" class="form-control" value="{{ liquor.liquor_type }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Bottle Size</label>
+        <input type="text" name="bottle_size" class="form-control" value="{{ liquor.bottle_size }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Quantity</label>
+        <input type="number" name="quantity" class="form-control" value="{{ liquor.quantity }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
