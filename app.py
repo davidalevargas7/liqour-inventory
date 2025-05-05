@@ -79,7 +79,6 @@ def setup_db():
     except Exception as e:
         return f"❌ Error creating tables: {str(e)}"
 
-
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
