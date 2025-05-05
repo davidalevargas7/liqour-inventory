@@ -3,7 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__, instance_relative_config=False)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///inventory.db'
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -60,5 +64,16 @@ def delete_liquor(id):
     db.session.commit()
     return redirect(url_for('index'))
 
+@app.route('/test-db')
+def test_db():
+    try:
+        db.session.execute('SELECT 1')
+        return "✅ Connected to database!"
+    except Exception as e:
+        return f"❌ Database error: {str(e)}"
+
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
