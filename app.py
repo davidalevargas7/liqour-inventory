@@ -71,6 +71,13 @@ def test_db():
         return "✅ Connected to database!"
     except Exception as e:
         return f"❌ Database error: {str(e)}"
+@app.route('/setup-db')
+def setup_db():
+    try:
+        db.create_all()
+        return "✅ Tables created in Supabase!"
+    except Exception as e:
+        return f"❌ Error creating tables: {str(e)}"
 
 
 if __name__ == '__main__':
